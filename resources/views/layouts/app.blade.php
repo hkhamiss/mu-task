@@ -18,7 +18,11 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+    @if(app()->getLocale()=='ar')
+    <body class="font-sans antialiased" dir="rtl">
+    @else
+        <body class="font-sans antialiased" dir="ltr">
+    @endif
         <div class="min-h-screen bg-gray-100" id="app">
             @include('layouts.navigation')
 
