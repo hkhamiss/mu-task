@@ -106,7 +106,6 @@
 
 
 
-
 </template>
 
 
@@ -121,6 +120,7 @@ export default {
     data(){
         return{
             posts:[],
+            open:false,
             form:  {
                 comment:'',
                 user_id:user_id,
@@ -133,12 +133,10 @@ export default {
                 user_id:user_id,
                 _token:csrf_token
             }
-
-
-
      }},
     mounted() {
       this.fetchPosts();
+
     },
     methods:{
         fetchPosts(){
@@ -191,7 +189,9 @@ export default {
             let response =fetch('/posts/'+post_id, requestOptions).then(this.fetchPosts).catch(error=>console.log(error));
             this.fetchPosts()
         },
+        checkPostsCount(){
 
+        }
     }
 }
 
