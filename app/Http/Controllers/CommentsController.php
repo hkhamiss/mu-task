@@ -3,18 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewCommentRequest;
+use App\Models\PostComment;
 use App\Repositories\CommentRepository;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
-    private $repository;
-    public function index(CommentRepository $repository){
+    public $repository;
+    public function __construct(CommentRepository $repository)
+    {
         $this->repository=$repository;
     }
 
-    public function store(NewCommentRequest $request){
-        $this->repository->store($request->all());
+    public function index(){
+
+    }
+
+    public function store(Request $request){
+        $data=$request->except('_token');
+        $this->repository->store($data);
+        return response()->json([],200);
     }
 
     public function update(Request $request,$id){

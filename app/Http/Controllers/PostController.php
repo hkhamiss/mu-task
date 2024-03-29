@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewPostRequest;
+use App\Models\PostComment;
 use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
+
 
 class PostController extends Controller
 {
@@ -21,14 +23,20 @@ class PostController extends Controller
     }
 
     public function store(NewPostRequest $request){
-        $this->repository->store($request->all());
+        $data=$request->except('_token');
+        $this->repository->store($data);
+        return response()->json([],200);
     }
 
     public function update(Request $request,$id){
         $this->repository->update($id,$request->all());
     }
 
-    public function delete($id){
+    public function destroy($id){
         $this->repository->destroy($id);
+        return response()->json([],200);
     }
+
+
+
 }

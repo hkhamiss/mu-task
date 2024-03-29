@@ -20,6 +20,8 @@ class PostResource extends JsonResource
                 'body'          =>  $this->body,
                 'owner'         =>  $this->owner,
                 'commnets'      =>  $this->commnets,
+                'commnets_count'      =>  $this->commnets->count(),
+                'created_at'    =>  strtotime($this->created_at),
         ];
     }
 }

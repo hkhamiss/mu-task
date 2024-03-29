@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\PostComment;
+use Illuminate\Support\Facades\Auth;
 
 class CommentRepository {
 
@@ -18,9 +19,7 @@ class CommentRepository {
 
 
     public function store($data){
-
         return $this->model()->create($data);
-
     }
 
     public function find($id)
