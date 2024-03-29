@@ -79,7 +79,15 @@
                 <div class="timeline-footer">
                     <ul>
                         <li v-for="comment in post.comments" :key="comment.id">
-                              <i class="fa fa-comments fa-fw fa-lg m-r-3"></i>{{comment.comment}}
+                           <i class="fa fa-comments fa-fw fa-lg m-r-3"></i>{{comment.comment}}
+                            <div class="timeline-likes" v-if="postform.user_id == post.owner.id">
+                                <div class="stats-right">
+                                    <form @submit.prevent="deleteComment">
+                                        <input type="hidden" name="comment_id" :value="comment.id"/>
+                                        <span class="stats-text"><button type="submit"><b style="color: red !important;">X</b></button></span>
+                                    </form>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -189,9 +197,18 @@ export default {
             let response =fetch('/posts/'+post_id, requestOptions).then(this.fetchPosts).catch(error=>console.log(error));
             this.fetchPosts()
         },
-        checkPostsCount(){
-
-        }
+        deleteComment(submitEvent){
+            let comment_id=submitEvent.target.elements.comment_id.value;
+            const requestOptions = {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    _token:csrf_token,
+                })
+            };
+            let response =fetch('/comments/'+comment_id, requestOptions).then(this.fetchPosts).catch(error=>console.log(error));
+            this.fetchPosts()
+        },
     }
 }
 

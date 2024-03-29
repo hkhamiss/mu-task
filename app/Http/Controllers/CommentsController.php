@@ -29,7 +29,8 @@ class CommentsController extends Controller
         $this->repository->update($request->all(),$id);
     }
 
-    public function delete($id){
+    public function destroy($id){
         $this->repository->destroy($id);
+        return response()->json([],200);
     }
 }
