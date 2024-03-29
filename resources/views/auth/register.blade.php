@@ -9,6 +9,14 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+
+            <!-- national id -->
+         <div>
+             <x-input-label for="national_id" :value="__('national_id')" />
+             <x-text-input id="national_id" class="block mt-1 w-full" type="text" name="national_id" :value="old('national_id')" required autofocus autocomplete="username" />
+             <x-input-error :messages="$errors->get('national_id')" class="mt-2" />
+         </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
