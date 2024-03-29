@@ -29,12 +29,20 @@ class PostController extends Controller
     }
 
     public function update(Request $request,$id){
-        $this->repository->update($id,$request->all());
+        $data=$request->except('_token');
+        $this->repository->update($id,$data);
+        return response()->json([],200);
     }
 
     public function destroy($id){
         $this->repository->destroy($id);
         return response()->json([],200);
+    }
+
+    public function show($id){
+
+        $data=$this->repository->find($id);
+        return response()->json($data,200);
     }
 
 

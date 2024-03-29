@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="app-lang" content="{{ app()->getLocale() }}">
         @if(auth()->check())
         <meta name="user_id" content="{{auth()->user()->id}}">
         @endif
@@ -13,16 +14,16 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-        <link  href="{{asset('assets/style.css')}}"  rel="stylesheet"/>
-
+        @if(app()->getLocale()=='ar')
+        <link  href="{{asset('assets/style-ar.css')}}"  rel="stylesheet"/>
+        @else
+            <link  href="{{asset('assets/style.css')}}"  rel="stylesheet"/>
+        @endif
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    @if(app()->getLocale()=='ar')
-    <body class="font-sans antialiased" dir="rtl">
-    @else
-        <body class="font-sans antialiased" dir="ltr">
-    @endif
+    <body class="font-sans antialiased">
+
         <div class="min-h-screen bg-gray-100" id="app">
             @include('layouts.navigation')
 
